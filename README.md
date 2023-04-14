@@ -13,7 +13,9 @@ CMakeテンプレートを使用してVisualStudioやXcodeのプロジェクト�
 CMakeテンプレートの使い方は以下のリポジトリに詳細が記述されています：
 - [archicad-addon-cmake](https://github.com/GRAPHISOFT/archicad-addon-cmake)
 
+または以下の日本語ガイドにもプロジェクトのビルド方法を紹介しています：
+- [サンプルコードの使い方](https://www.graphisoft.co.jp/devsrc/AddonAPIPage/docs/index.html#/Examples/howtouse_example)
 
 ## サンプルコード
-- サンプルダイアログ
-- サンプルパレット
+- サンプルダイアログ：モダルダイアログの作成方法を紹介しています。
+- サンプルパレット：パレットとリストボックスの使い方を紹介しています。
