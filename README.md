@@ -1,4 +1,4 @@
-# Archicad Add-on API Examples 26
+# Archicad Add-on API Examples 27
 
 このリポジトリにはArchicad Add-Onを開発する上で参考になるサンプルコードを含んだプロジェクトを用意してあります。
 CMakeテンプレートを使用してVisualStudioやXcodeのプロジェクトを作成することができます。

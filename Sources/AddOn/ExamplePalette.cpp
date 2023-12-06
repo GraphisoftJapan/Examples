@@ -44,12 +44,12 @@ void ExamplePalette::ZoomToElement(const API_Guid& guid)
 {
 	API_Neig neig = {};
 	neig.guid = guid;
-	ACAPI_Element_DeselectAll();
-	ACAPI_Element_Select({ neig }, true);
+	ACAPI_Selection_DeselectAll();
+	ACAPI_Selection_Select ({ neig }, true);
 
 	GS::Array<API_Guid> guidArray;
 	guidArray.Push(guid);
-	ACAPI_Automate(APIDo_ZoomToElementsID, &guidArray);
+	ACAPI_View_ZoomToElements(&guidArray);
 }
 
 
@@ -100,7 +100,7 @@ void ExamplePalette::UpdateListBox()
 			continue;
 
 		GS::UniString elemNameStr;
-		ACAPI_Goodies_GetElemTypeName(elem.header.type.typeID, elemNameStr);
+		ACAPI_Element_GetElemTypeName(elem.header.type.typeID, elemNameStr);
 
 		listBox.AppendItem();
 		listBox.SetTabItemText(DG::SingleSelListBox::BottomItem, 1, elemNameStr);

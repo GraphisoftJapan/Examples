@@ -46,7 +46,7 @@ API_AddonType __ACDLL_CALL CheckEnvironment (API_EnvirParams* envir)
 
 GSErrCode __ACDLL_CALL RegisterInterface (void)
 {
-	return ACAPI_Register_Menu (AddOnMenuID, 0, MenuCode_UserDef, MenuFlag_Default);
+	return ACAPI_MenuItem_RegisterMenu  (AddOnMenuID, 0, MenuCode_UserDef, MenuFlag_Default);
 }
 
 GSErrCode __ACENV_CALL Initialize (void)
@@ -57,7 +57,7 @@ GSErrCode __ACENV_CALL Initialize (void)
 		API_PalEnabled_3D + API_PalEnabled_Detail + API_PalEnabled_Worksheet + API_PalEnabled_Layout + API_PalEnabled_DocumentFrom3D,
 		GSGuid2APIGuid(ExamplePaletteGuid));
 
-	err = ACAPI_Install_MenuHandler(AddOnMenuID, MenuCommandHandler);
+	err = ACAPI_MenuItem_InstallMenuHandler (AddOnMenuID, MenuCommandHandler);
 
 	return err;
 }

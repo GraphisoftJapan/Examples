@@ -68,7 +68,7 @@ API_ElemType	Neig_To_ElemID (API_NeigID neigID)
 	API_ElemType	type;
 	GSErrCode		err;
 
-	err = ACAPI_Goodies_NeigIDToElemType (neigID, type);
+	err = ACAPI_Element_NeigIDToElemType (neigID, type);
 	if (err != NoError)
 		type = API_ZombieElemID;
 
@@ -369,7 +369,7 @@ const GS::UniString		ElemID_To_Name (const API_ElemType& type)
 {
 	GS::UniString	elemNameStr;
 
-	ACAPI_Goodies_GetElemTypeName (type, elemNameStr);
+	ACAPI_Element_GetElemTypeName (type, elemNameStr);
 
 	return elemNameStr;
 }		// ElemID_To_Name
@@ -405,7 +405,7 @@ bool	ClickAPoint (const char		*prompt,
 	CHTruncate (prompt, pointInfo.prompt, sizeof (pointInfo.prompt));
 	pointInfo.changeFilter = false;
 	pointInfo.changePlane  = false;
-	err = ACAPI_Interface (APIIo_GetPointID, &pointInfo, nullptr);
+	err = ACAPI_UserInput_GetPoint (&pointInfo);
 	if (err != NoError) {
 		if (err != APIERR_CANCEL) {
 			WriteReport_Err ("Error in APIIo_GetPointID", err);
@@ -437,7 +437,7 @@ bool	GetAnArc (const char*	prompt,
 	GSErrCode			err;
 
 	CHTruncate (prompt, pointInfo.prompt, sizeof (pointInfo.prompt));
-	err = ACAPI_Interface (APIIo_GetPointID, &pointInfo, nullptr);
+	err = ACAPI_UserInput_GetPoint (&pointInfo);
 	if (err != NoError) {
 		return false;
 	}
@@ -446,7 +446,7 @@ bool	GetAnArc (const char*	prompt,
 	lineInfo.startCoord = pointInfo.pos;						// line starts with the clicked point
 	lineInfo.disableDefaultFeedback = false;					// draw the default thick rubber line
 
-	err = ACAPI_Interface (APIIo_GetLineID, &lineInfo, nullptr);
+	err = ACAPI_UserInput_GetLine (&lineInfo);
 	if (err != NoError) {
 		return false;
 	}
@@ -457,7 +457,7 @@ bool	GetAnArc (const char*	prompt,
 	arcInfo.startCoordGiven = true;
 	arcInfo.disableDefaultFeedback = false;						// draw the default thick rubber line
 
-	err = ACAPI_Interface (APIIo_GetArcID, &arcInfo, nullptr);
+	err = ACAPI_UserInput_GetArc (&arcInfo);
 	if (err != NoError) {
 		return false;
 	}
@@ -500,7 +500,7 @@ bool	ClickAnElem (const char*			prompt,
 	CHTruncate (prompt, pointInfo.prompt, sizeof (pointInfo.prompt));
 	pointInfo.changeFilter = false;
 	pointInfo.changePlane  = false;
-	err = ACAPI_Interface (APIIo_GetPointID, &pointInfo, nullptr);
+	err = ACAPI_UserInput_GetPoint (&pointInfo);
 	if (err != NoError) {
 		if (err != APIERR_CANCEL) {
 			WriteReport_Err ("Error in APIIo_GetPointID", err);
@@ -517,7 +517,7 @@ bool	ClickAnElem (const char*			prompt,
 		pars.loc.y = pointInfo.pos.y;
 		pars.z = 1.00E6;
 		pars.filterBits = APIFilt_OnVisLayer | APIFilt_OnActFloor;
-		err = ACAPI_Goodies (APIAny_SearchElementByCoordID, &pars, &elemHead.guid);
+		err = ACAPI_Element_SearchElementByCoord (&pars, &elemHead.guid);
 		if (err == NoError) {
 			elemHead.type = pars.type;
 			ElemHead_To_Neig (&pointInfo.neig, &elemHead);
@@ -599,7 +599,7 @@ bool		GetMenuItemMark (short menuResID, short itemIndex)
 	itemRef.menuResID = menuResID;
 	itemRef.itemIndex = itemIndex;
 
-	ACAPI_Interface (APIIo_GetMenuItemFlagsID, &itemRef, &itemFlags);
+	ACAPI_MenuItem_GetMenuItemFlags (&itemRef, &itemFlags);
 
 	return (itemFlags & API_MenuItemChecked) != 0;
 }		// GetMenuItemMark
@@ -617,14 +617,14 @@ bool		InvertMenuItemMark (short menuResID, short itemIndex)
 	itemRef.menuResID = menuResID;
 	itemRef.itemIndex = itemIndex;
 
-	ACAPI_Interface (APIIo_GetMenuItemFlagsID, &itemRef, &itemFlags);
+	ACAPI_MenuItem_GetMenuItemFlags (&itemRef, &itemFlags);
 
 	if ((itemFlags & API_MenuItemChecked) == 0)
 		itemFlags |= API_MenuItemChecked;
 	else
 		itemFlags &= ~API_MenuItemChecked;
 
-	ACAPI_Interface (APIIo_SetMenuItemFlagsID, &itemRef, &itemFlags);
+	ACAPI_MenuItem_SetMenuItemFlags (&itemRef, &itemFlags);
 
 	return (itemFlags & API_MenuItemChecked) != 0;
 }		// InvertMenuItemMark
@@ -642,14 +642,14 @@ void		DisableEnableMenuItem (short menuResID, short itemIndex, bool disable)
 	itemRef.menuResID = menuResID;
 	itemRef.itemIndex = itemIndex;
 
-	ACAPI_Interface (APIIo_GetMenuItemFlagsID, &itemRef, &itemFlags);
+	ACAPI_MenuItem_GetMenuItemFlags (&itemRef, &itemFlags);
 
 	if (disable)
 		itemFlags |= API_MenuItemDisabled;
 	else
 		itemFlags &= ~API_MenuItemDisabled;
 
-	ACAPI_Interface (APIIo_SetMenuItemFlagsID, &itemRef, &itemFlags);
+	ACAPI_MenuItem_SetMenuItemFlags (&itemRef, &itemFlags);
 
 	return;
 }		// DisEnableMenuItem
