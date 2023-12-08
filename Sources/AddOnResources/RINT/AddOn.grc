@@ -10,6 +10,7 @@
 /* [  ] */		"GUI"
 /* [ 1] */		"サンプルダイアログ^E3 ^ES ^EE ^EI ^ED ^ET"
 /* [ 2] */		"サンプルパレット^E3 ^ES ^EE ^EI ^ED ^ET"
+/* [ 3] */		"サンプルロールダウンダイアログ^E3 ^ES ^EE ^EI ^ED ^ET"
 }
 
 'GDLG' ID_ADDON_DLG Modal | grow   40   40  345  128  "Example Dialog" {
@@ -32,4 +33,26 @@
 'DLGH' ID_EXAMPLE_PALETTE Palette_Example {
 1	"リストボックスのツールチップを表示"		SingleSelList_0
 2	"リストボックスの内容を更新"				Button_0
+}
+
+
+'GDLG'  ID_ROLLDOWN_HEADERPAGE  TabPage		0	0	300		100	"Header" {
+/* [  1] */ LeftText	    5   5   100  18 SmallPlain  "Header Page"
+}
+
+'GDLG'  ID_ROLLDOWN_LEFTPAGE  TabPage		0	0	100		300	"Left" {
+/* [  1] */ LeftText	    5   5   100  18 SmallPlain  "Left Page"
+}
+
+'GDLG'  ID_ROLLDOWN_MIDDLEPAGE  TabPage		0	0	300		300	"Middle" {
+/* [  1] */ LeftText	    5   5   100  18 SmallPlain  "Middle Page"
+}
+
+'GDLG'  ID_ROLLDOWN_FIRSTPAGE  TabPage		0	0	300		300	"First" {
+/* [  1] */ LeftText	    5    5   100  18 SmallPlain  "First Page"
+/* [  2] */ SingleSelList	5	30   290 265 SmallPlain  PartialItems HVScroll 21
+}
+
+'GDLG'  ID_ROLLDOWN_SECONDPAGE  TabPage		0	0	300		300	"Second" {
+/* [  1] */ LeftText	    5   5   100  18 SmallPlain  "Second Page"
 }

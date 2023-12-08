@@ -17,19 +17,30 @@ static const short AddOnMenuID				= ID_ADDON_MENU;
 
 static GSErrCode MenuCommandHandler (const API_MenuParams *menuParams)
 {
-	switch (menuParams->menuItemRef.menuResID) {
+	switch (menuParams->menuItemRef.menuResID) 
+	{
 		case AddOnMenuID:
-			switch (menuParams->menuItemRef.itemIndex) {
+			switch (menuParams->menuItemRef.itemIndex) 
+			{
 				case 1:
 				{
 					ExampleDialog dlg;
 					dlg.Invoke();
 				}
 					break;
+
 				case 2:
 				{
 					ExamplePaletteController::GetInstance().TogglePalette();
 				}
+					break;
+
+				case 3:
+				{
+					ExampleRollDownDialog rdDlg;
+					rdDlg.Invoke();
+				}
+					break;
 			}
 			break;
 	}

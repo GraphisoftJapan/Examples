@@ -4,7 +4,18 @@
 #define ID_ADDON_INFO		32000
 #define ID_ADDON_MENU		32500
 
-#define ID_ADDON_DLG		32600
-#define ID_EXAMPLE_PALETTE  32601
+// modal dialog resource
+#define ID_EXAMPLE_MODAL_DLG	32600
+
+// palette resource
+#define ID_EXAMPLE_PALETTE		32601
+
+// rolldown resource
+#define ID_ROLLDOWN_HEADERPAGE	32602
+#define ID_ROLLDOWN_LEFTPAGE	32603
+#define ID_ROLLDOWN_MIDDLEPAGE	32604
+#define ID_ROLLDOWN_FIRSTPAGE	32605
+#define ID_ROLLDOWN_SECONDPAGE	32606
+
 
 #endif
